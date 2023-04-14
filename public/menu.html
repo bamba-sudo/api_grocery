@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Generate QR Code</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+	<!-- QR code generator library -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+</head>
+
+
+<body>
+	<div hidden id="notfound" class="alert alert-danger alert-dismissible fade show" role="alert">
+		<strong>Le produit n'existe pas !</strong> 
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	<div hidden id="fail" class="alert alert-danger alert-dismissible fade show" role="alert">
+		<strong>Il y a eu une erreur, veuillez recommencer.</strong> 
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	<div hidden id="success" class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong>Vous avez supprimer avec success du frigo. Maintenant il est dans la liste d'achat.</strong> 
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	<div class="container py-5">
+		<div class="row">
+			<div class="col-lg-6 mx-auto">
+				<div class="card shadow-lg">
+					<div class="card-body">
+						<h1 id="label" class="card-title text-center mb-4"> Qr code </h1>
+						<p id="consigne" class="card-text text-center mb-4">Vous pouvez observer quels produits sont
+							dans le <b> frigo </b> et la <b> liste </b> </p>
+						<div class="d-flex justify-content-center">
+							<button id="liste" type="button" class="btn btn-primary me-3">Liste</button>
+							<button id="frigo" type="button" class="btn btn-primary">Frigo</button>
+						</div>
+						<div class="mt-5">
+							<button id="retour" type="button" class="btn btn-secondary">Retour</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Bootstrap JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script>
+
+		$(document).ready(async function () {
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+
+			// get the value of the 'productId' parameter
+			const statut = urlParams.get('statut');
+			const id = urlParams.get('id');
+
+			if (statut == 'fail') {
+				$('#fail').prop('hidden', false);
+			} else if (statut == 'success') {
+				$('#success').prop('hidden', false);
+			} else if(id == 'undefined'){
+				$('#notfound').prop('hidden', false);
+			}
+
+			$('#retour').click(function () {
+				window.location.href = 'http://34.168.108.149:3002/';
+			})
+			$('#liste').click(async function () {
+				
+			})
+			$('#frigo').click(async function () {
+				
+			})
+		})
+	</script>
+</body>
+
+</html>
